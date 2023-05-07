@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Libs.Configs;
 
@@ -62,9 +63,11 @@ public class PinchersofPower extends SubsystemBase {
     inSpin();
   }
 
-  public void noTake() {
-    unclamp();
-    noSpin();
+  public void noTake(boolean state) {
+    if(state == true) {
+      noSpin();
+    }
+    inSpin();
   }
 
   public void outtake(boolean state) {
@@ -94,6 +97,18 @@ public class PinchersofPower extends SubsystemBase {
       return true;
     }
     return false;
+  }
+
+  public InstantCommand intakeCommand(boolean state) {
+    return new InstantCommand(() -> intake(state));
+  }
+
+  public InstantCommand outtakeCommand(boolean state) {
+    return new InstantCommand(() -> outtake(state));
+  }
+
+  public InstantCommand notakeCommand(boolean state) {
+    return new InstantCommand(() -> noTake(state));
   }
 
   @Override

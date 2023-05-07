@@ -34,7 +34,7 @@ public class Configs {
         return motor;
     }
 
-    public static  DutyCycleEncoder AbsEncbore(DutyCycleEncoder encoder, int port, double conversionFactor) {
+    public static DutyCycleEncoder AbsEncbore(DutyCycleEncoder encoder, int port, double conversionFactor) {
         encoder = new DutyCycleEncoder(port);
         encoder.setDistancePerRotation(conversionFactor);
         return encoder;

@@ -39,6 +39,31 @@ public class LEDS extends SubsystemBase {
     m_led.start();
   }
 
+  public void setRed() {
+    setLEDS(255, 0, 0);
+  }
+
+  public void setGreen() {
+    setLEDS(0, 255, 0);
+  }
+
+  public void setBlue() {
+    setLEDS(0, 0, 255);
+  }
+
+  public void setYellow() {
+    setLEDS(255, 255, 0);
+  }
+
+  public void setPurple() {
+    setLEDS(255, 0, 255);
+  }
+
+  public void setState(boolean state) {
+    if(state) {setYellow();}
+    else {setPurple();}
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

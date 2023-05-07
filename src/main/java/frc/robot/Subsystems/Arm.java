@@ -1,5 +1,7 @@
 package frc.robot.Subsystems;
 import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
 import edu.wpi.first.math.controller.ArmFeedforward;
@@ -48,9 +50,9 @@ public class Arm extends SubsystemBase {
     m_ElbowConstraints = new TrapezoidProfile.Constraints(1.0, 1.0);
     m_WristConstraints = new TrapezoidProfile.Constraints(1.0, 1.0);
 
-    m_BiscepController = new ProfiledPIDController(1.0, 0.0, 0.0, m_BiscepConstraints);
-    m_ElbowController = new ProfiledPIDController(1.0, 0.0, 0.0, m_ElbowConstraints);
-    m_WristController = new ProfiledPIDController(1.0, 0.0, 0.0, m_WristConstraints);
+    m_BiscepController = new ProfiledPIDController(1.5, 0.0, 0.0, m_BiscepConstraints);
+    m_ElbowController = new ProfiledPIDController(1.5, 0.0, 0.0, m_ElbowConstraints);
+    m_WristController = new ProfiledPIDController(1.5, 0.0, 0.0, m_WristConstraints);
 
     configPPID(m_BiscepController);
     configPPID(m_ElbowController);
@@ -125,7 +127,7 @@ public class Arm extends SubsystemBase {
     
     double FF = getDoubleJointFFVector().get(0, 0);
 
-    return PPID + FF;
+    return MathUtil.clamp(PPID + FF, -12, 12);
   }
 
   public double elbowCalculate(double setpoint) {
@@ -133,13 +135,13 @@ public class Arm extends SubsystemBase {
     
     double FF = getDoubleJointFFVector().get(1, 0);
       
-    return PPID + FF;
+    return MathUtil.clamp(PPID + FF, -12, 12);
   }
 
   public double wristCalculate(double setpoint) {
     double PPID = m_WristController.calculate(getWristRadians(), setpoint);
     double FF = m_WristFF.calculate(getWristRadians(), getWristRadiansPerSecond());
-    return PPID + FF;
+    return MathUtil.clamp(PPID + FF, -12, 12);
   }
 
   public double getBiscepRadians() {
