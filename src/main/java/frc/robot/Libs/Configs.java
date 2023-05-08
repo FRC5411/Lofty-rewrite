@@ -40,7 +40,7 @@ public class Configs {
         return encoder;
     }
 
-    private static TalonFX DriveFX(TalonFX motor, double DRIVE_kP, double DRIVE_kS, InvertedValue invert) {
+    private static TalonFX ProDriveFX(TalonFX motor, double DRIVE_kP, double DRIVE_kS, InvertedValue invert) {
         TalonFXConfigurator configer = motor.getConfigurator();
         TalonFXConfiguration config = new TalonFXConfiguration();
 
@@ -62,7 +62,7 @@ public class Configs {
         return motor;
     }
 
-    private static TalonFX AzimuthFX (TalonFX motor, double DRIVE_kP, double DRIVE_kD, double DRIVE_kS, InvertedValue invert, MotionMagicConfigs profile) {
+    private static TalonFX ProAzimuthFX (TalonFX motor, double DRIVE_kP, double DRIVE_kD, double DRIVE_kS, InvertedValue invert, MotionMagicConfigs profile) {
         TalonFXConfigurator configer = motor.getConfigurator();
         TalonFXConfiguration config = new TalonFXConfiguration();
 
