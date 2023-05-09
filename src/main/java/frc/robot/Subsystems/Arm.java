@@ -10,6 +10,7 @@ import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,6 +37,9 @@ public class Arm extends SubsystemBase {
   private double m_BiscepVelRad;
   private double m_ElbowVelRad;
   private double m_WristVelRad;
+  private MechanismLigament2d m_BiscepLigament;
+  private MechanismLigament2d m_ElbowLigament;
+  private MechanismLigament2d m_WristLigament;
 
   public Arm() {
     m_Biscep = Configs.NEO(m_Biscep, 0,  false);
@@ -64,6 +68,10 @@ public class Arm extends SubsystemBase {
     m_DoubleJointFF = new DoubleJointedArmFeedforward(m_BiscepConfig, m_ElbowConfig);
 
     m_WristFF = new ArmFeedforward(0.0, 0.0, 0.0, 0.0);
+
+    m_BiscepLigament = new MechanismLigament2d("Biscep", 1, 0);
+    m_ElbowLigament = new MechanismLigament2d("Elbow", 2, 0);
+    m_WristLigament = new MechanismLigament2d("Wrist", 3, 0);
   }
 
   @Override
